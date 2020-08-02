@@ -1,0 +1,37 @@
+[
+    {
+        "id": "1",
+        "name": "The Wyld Stallions",
+        "latitude": "47.453",
+        "longitude": "122.272",
+        "budget": "4500"
+    },
+    {
+        "id": "2",
+        "name": "Team Zoidberg",
+        "latitude": "47.697",
+        "longitude": "122.121",
+        "budget": "6000"
+    },
+    {
+        "id": "3",
+        "name": "The Zoomers",
+        "latitude": "47.738",
+        "longitude": "122.267",
+        "budget": "1500"
+    },
+    {
+        "id": "4",
+        "name": "North Horseburg Little League",
+        "latitude": "47.317",
+        "longitude": "122.363",
+        "budget": "3500"
+    },
+    {
+        "id": "5",
+        "name": "The Duloc Ogres",
+        "latitude": "47.548",
+        "longitude": "122.235",
+        "budget": "2500"
+    }
+]

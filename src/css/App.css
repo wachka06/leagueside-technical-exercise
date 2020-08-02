@@ -1,0 +1,55 @@
+.app {
+  padding-left: 1rem;
+}
+
+h3 {
+  color: var(--blue);
+  padding: 1rem 0;
+}
+
+form {
+  display: grid;
+  margin: .6rem 1rem;
+}
+
+input {
+  border-bottom: 1px dashed black;
+  margin-bottom: 0.2rem;
+}
+
+input:nth-child(5) {
+  border-bottom: none;
+}
+
+input:focus {
+  border: 2px solid var(--blue);
+  border-radius: .3rem;
+  outline: 0;
+}
+
+.submit {
+  background-color: var(--blue);
+  border-radius: 3rem;
+  color: white;
+  font-weight: bold;
+  margin: 0.4rem .2rem;
+  padding: .2rem .4rem;
+  width: 4rem;
+}
+
+.submit:hover {
+  background-color: gray;
+}
+
+table {
+  border: solid 1px var(--blue);
+}
+
+table tr:nth-child(1) {
+  background-color: var(--blue);
+  color: white;
+}
+
+td {
+  padding: .2rem .8rem;
+}
