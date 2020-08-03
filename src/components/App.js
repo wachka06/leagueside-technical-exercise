@@ -29,13 +29,48 @@ class App extends Component {
     let insideRadius = [];
     this.state.sponsors.forEach((sponsor) => {
       let latitude = parseFloat(sponsor.latitude);
+      let latDifference = latitude - this.state.latitudeInput;
       let longitude = parseFloat(sponsor.longitude);
+      let longDifference = longitude - this.state.longitudeInput;
       let radiusInput = parseFloat(this.state.radiusInput);
-      if (radiusInput <= Math.sqrt(latitude ^ (2 + longitude) ^ 2) * 68) {
+      let dist = distance(
+        latitude,
+        longitude,
+        this.state.latitudeInput,
+        this.state.longitudeInput
+      );
+      if (dist <= radiusInput) {
         return insideRadius.push(sponsor);
       }
     });
-    if (!insideRadius) {
+    function distance(lat1, lon1, lat2, lon2, unit) {
+      if (lat1 == lat2 && lon1 == lon2) {
+        return 0;
+      } else {
+        var radlat1 = (Math.PI * lat1) / 180;
+        var radlat2 = (Math.PI * lat2) / 180;
+        var theta = lon1 - lon2;
+        var radtheta = (Math.PI * theta) / 180;
+        var dist =
+          Math.sin(radlat1) * Math.sin(radlat2) +
+          Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+        if (dist > 1) {
+          dist = 1;
+        }
+        dist = Math.acos(dist);
+        dist = (dist * 180) / Math.PI;
+        dist = dist * 60 * 1.1515;
+        if (unit == "K") {
+          dist = dist * 1.609344;
+        }
+        if (unit == "N") {
+          dist = dist * 0.8684;
+        }
+        return dist;
+      }
+    }
+
+    if (insideRadius.length === 0) {
       alert("There's no results inside the radius.");
     }
     let sortRadius = insideRadius.sort((a, b) => {
@@ -46,17 +81,15 @@ class App extends Component {
     });
     let budgetInput = parseFloat(this.state.budgetInput);
     let total = 0;
-
     let filteredSponsors = [];
-    let i = 0;
-    while (total <= budgetInput) {
-      let budget = sortRadius[i].budget;
-      total += budget;
-      filteredSponsors.push(sortRadius[i]);
-      i++;
-    }
+    sortRadius.forEach((inRadius) => {
+      total += parseFloat(inRadius.budget);
+      if (total <= budgetInput) {
+        filteredSponsors.push(inRadius);
+      }
+    });
     let radiusInput = parseFloat(this.state.radiusInput);
-    if (!filteredSponsors) {
+    if (filteredSponsors.length === 0) {
       alert("There's no results inside the budget.");
     }
     this.setState({ filteredSponsors });
